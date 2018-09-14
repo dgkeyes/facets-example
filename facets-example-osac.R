@@ -46,9 +46,10 @@ tfff_fill_colors <- scale_fill_manual(values = rev(c(tfff_dark_green,
 
 # Plot - not facetted ------------------------------------------------------------
 
-regions_plot <- ggplot(data = regions, aes(x = year_label, 
-                y = n, 
-                fill = region)) +
+regions_plot <- ggplot(data = regions, 
+                       aes(x = year_label, 
+                           y = n, 
+                           fill = region)) +
      geom_area() +
      tfff_theme +
      tfff_fill_colors +
@@ -67,8 +68,7 @@ ggsave("regions-plot.png",
 
 regions_plot +
      facet_grid(cols = vars(region)) +
-     theme(axis.title = element_blank(),
-           axis.text = element_text(size = 8))
+     theme(axis.title = element_blank())
 
 ggsave("regions-plot-facetted.png",
        height = 5,
