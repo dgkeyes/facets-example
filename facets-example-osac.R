@@ -1,3 +1,4 @@
+# Packages ----------------------------------------------------------------
 
 library(tidyverse)
 library(scales)
@@ -5,13 +6,9 @@ library(extrafont)
 library(hrbrthemes)
 
 
-
-
 # Get data ----------------------------------------------------------------
 
-
 regions <- read_csv("regions.csv")
-
 
 
 # Colors ------------------------------------------------------------------
@@ -30,10 +27,8 @@ tfff_light_gray <- "#eeeeee"
 
 # Themes ------------------------------------------------------------------
 
-
-
 tfff_theme <- theme_ipsum(base_family = "Calibri",
-                          base_size = 13) +
+                          base_size = 10) +
      theme(legend.position = "none",
            axis.title = element_blank(),
            panel.grid.minor.x = element_blank(),
@@ -49,10 +44,7 @@ tfff_fill_colors <- scale_fill_manual(values = rev(c(tfff_dark_green,
                                                      tfff_red))) 
 
 
-
-
-
-# Not facetted ------------------------------------------------------------
+# Plot - not facetted ------------------------------------------------------------
 
 regions_plot <- ggplot(data = regions, aes(x = year_label, 
                 y = n, 
@@ -66,13 +58,18 @@ regions_plot <- ggplot(data = regions, aes(x = year_label,
 regions_plot + 
      theme(legend.position = "right") 
 
+ggsave("regions-plot.png",
+       height = 5,
+       width = 8)
 
 
-
-
-# Facetted ----------------------------------------------------------------
+# Plot - facetted ----------------------------------------------------------------
 
 regions_plot +
      facet_grid(cols = vars(region)) +
-     theme(axis.title = element_blank())
+     theme(axis.title = element_blank(),
+           axis.text = element_text(size = 8))
 
+ggsave("regions-plot-facetted.png",
+       height = 5,
+       width = 10)
